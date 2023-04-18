@@ -1,9 +1,12 @@
-import './App.css';
-import Wrapper from './components/Wrapper/Wrapper';
+import { GlobalStyle } from './GlobalStyle'; 
+import Container from './components/Container/Container';
 
 const App = () => {
   return (
-    <Wrapper />
+    <>
+      <GlobalStyle />
+      <Container />
+    </>
   );
 }
 
