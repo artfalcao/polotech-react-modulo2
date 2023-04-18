@@ -1,11 +1,11 @@
 import { GlobalStyle } from './GlobalStyle'; 
-import Container from './components/Container/Container';
+import ListPage from './pages/ListPage';
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Container />
+      <ListPage />
     </>
   );
 }

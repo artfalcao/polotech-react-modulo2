@@ -3,3 +3,7 @@ export interface IActivity {
   label: string,
   checked: boolean
 }
+
+export type ActvityProps = {
+  checked: boolean
+}
