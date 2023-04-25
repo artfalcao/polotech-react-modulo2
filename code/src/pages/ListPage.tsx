@@ -11,6 +11,7 @@ import Input from '../components/Input';
 
 //types
 import { IActivity } from '../components/Activity/Activity.types';
+import Dataless from '../components/Dataless';
 
 
 const ListPage = () => {
@@ -68,12 +69,15 @@ const ListPage = () => {
 
   return (
     <Container>
+      <h2>To-Do</h2>
       {/* <Search /> */}
       {/* <Spacer /> */}
       <ToDoContainer>
-        <h2>To-Do</h2>
         <Spacer height='1'/>
-          {activitys.map((eachActivity) => (
+        
+          {activitys.length === 0 
+            ? (<Dataless />) 
+            : activitys.map((eachActivity) => (
             <>
             <ActivityCard key={eachActivity.id} checked={eachActivity.checked} >
               <Checkbox 
@@ -84,7 +88,7 @@ const ListPage = () => {
                   }
                 />
               <Spacer width="1"/>
-              {eachActivity.label}
+              <p>{eachActivity.label}</p>
             </ActivityCard>
             <Spacer height='1'/>
             </>
