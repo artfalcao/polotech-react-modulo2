@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   width: 80%;
-  height: 24px;
+  height: 20px;
   margin: 0 auto;
   padding: 1em;
   border: none;
   border-radius: 16px;
   background-color: #D5CCFF;
   color: #000;
-  font-size: 1.5em;
+  font-size: 1.2em;
 
 
   ::placeholder,
