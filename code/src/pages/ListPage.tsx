@@ -17,17 +17,21 @@ const ListPage = () => {
   const [activitys, setActivitys] = useState<IActivity[]>([]);
   const [newActivityLabel, setNewActivityLabel] = useState("");
 
-  useEffect(() => {
-    console.log(activitys);
-  }, [activitys])
-
   const handleActivityChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setNewActivityLabel(e.target.value);
   }
 
+  const saveActivitys = (updatedActivitys: IActivity[]) => {
+    const activitysString = JSON.stringify(updatedActivitys);
+    localStorage.setItem("activitys", activitysString);
+  };
+
   const addActivity = (label : string) => {
     const id = nanoid();
-    setActivitys((prevActivitys) => [...prevActivitys, { id, label, checked:false }]);
+    const currentActivity: IActivity = {id, label: label, checked: false};
+    const updatedActivitys = [...activitys, currentActivity];
+    setActivitys(updatedActivitys);
+    saveActivitys(updatedActivitys);
   }
 
   const handleActivityKeyPress = (e : React.KeyboardEvent<HTMLInputElement>) => {
@@ -48,7 +52,19 @@ const ListPage = () => {
 
   const handleActivityCompleteChange = (event: React.ChangeEvent<HTMLInputElement>, eachActivity : IActivity) => {
       updateActivityCompletion(eachActivity.id, event.target.checked);
+  };
+
+  useEffect(() => {
+    const fetchActivitys = () => {
+      const activitysString = localStorage.getItem("activitys");
+      if (activitysString) {
+        const activitysArray = JSON.parse(activitysString);
+        setActivitys(activitysArray);
+      }
     };
+
+    fetchActivitys();
+  }, []);
 
   return (
     <Container>

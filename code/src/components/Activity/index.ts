@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { CheckboxProps } from "../Checkbox";
 import { ActvityProps } from "./Activity.types";
 
 export const ActivityCard = styled.label<ActvityProps>`
