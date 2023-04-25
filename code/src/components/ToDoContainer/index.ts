@@ -11,13 +11,24 @@ export const ToDoContainer = styled.div`
   background-color: #D5CCFF;
   
   display: flex;
-  
   flex-direction: column;
   justify-content: flex-start;
+  gap: .5em;
+
+  overflow-y: scroll;
   
-  h2 {
-    color: #2B1887;
-    font-size: 3em;
+  ::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F4F2FF;        /* color of the tracking area */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #2B1887;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #F4F2FF;  /* creates padding around scroll thumb */
   }
 `
 
