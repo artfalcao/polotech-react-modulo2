@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { nanoid } from 'nanoid';
+import React, { useState, useMemo } from 'react';
+import { useActivity } from '../context/activity.context';
 
 //components
 import Container from '../components/ToDoContainer/Container';
@@ -15,6 +15,7 @@ import { LeftColumn, CenterColumn } from '../components/Columns/index';
 import { IActivity } from '../components/Activity/Activity.types';
 import Dataless from '../components/Dataless';
 
+
 export type TStatus = {
   all : number,
   checked: number,
@@ -22,24 +23,11 @@ export type TStatus = {
 }
 
 const ListPage = () => {
-  const [activitys, setActivitys] = useState<IActivity[]>([]);
+  const {  activitys, addActivity, updateActivityCompletion } = useActivity();
   const [newActivityLabel, setNewActivityLabel] = useState("");
 
   const handleActivityChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setNewActivityLabel(e.target.value);
-  }
-
-  const saveActivitys = (updatedActivitys: IActivity[]) => {
-    const activitysString = JSON.stringify(updatedActivitys);
-    localStorage.setItem("activitys", activitysString);
-  };
-
-  const addActivity = (label : string) => {
-    const id = nanoid();
-    const currentActivity: IActivity = {id, label: label, checked: false};
-    const updatedActivitys = [...activitys, currentActivity];
-    setActivitys(updatedActivitys);
-    saveActivitys(updatedActivitys);
   }
 
   const handleActivityKeyPress = (e : React.KeyboardEvent<HTMLInputElement>) => {
@@ -48,15 +36,6 @@ const ListPage = () => {
       setNewActivityLabel("");
     }
   }
-
-  const updateActivityCompletion = (activityId: string, checked: boolean) => {
-    setActivitys((activitys) =>
-      activitys.map((activity) => {
-        if (activity.id === activityId) return { ...activity, checked };
-        return activity;
-      })
-    );
-  };
 
   const handleActivityCompleteChange = (event: React.ChangeEvent<HTMLInputElement>, eachActivity : IActivity) => {
       updateActivityCompletion(eachActivity.id, event.target.checked);
@@ -89,18 +68,6 @@ const ListPage = () => {
     return status;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activitys]);
-
-  useEffect(() => {
-    const fetchActivitys = () => {
-      const activitysString = localStorage.getItem("activitys");
-      if (activitysString) {
-        const activitysArray = JSON.parse(activitysString);
-        setActivitys(activitysArray);
-      }
-    };
-
-    fetchActivitys();
-  }, []);
 
   return (
     <Container>
