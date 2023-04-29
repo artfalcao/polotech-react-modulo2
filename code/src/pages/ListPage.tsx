@@ -9,7 +9,7 @@ import ActivityCard from '../components/Activity';
 import Spacer from '../components/Spacer';
 import Input from '../components/Input';
 import Header from '../components/Header';
-import { LeftColumn, CenterColumn } from '../components/Columns/index';
+import { Column } from '../components/Column/index';
 
 //types
 import { IActivity } from '../components/Activity/Activity.types';
@@ -71,11 +71,11 @@ const ListPage = () => {
 
   return (
     <Container>
-      <LeftColumn>
+      <Column>
         <Header status={Status}/>
-      </LeftColumn>
+      </Column>
 
-      <CenterColumn>
+      <Column>
         <ToDoContainer>
           <Spacer height='1'/>
           
@@ -104,7 +104,7 @@ const ListPage = () => {
           onChange={handleActivityChange}
           onKeyPress={handleActivityKeyPress}
         />
-      </CenterColumn>
+      </Column>
       
       {/* <Search /> */}
       {/* <Spacer /> */}
