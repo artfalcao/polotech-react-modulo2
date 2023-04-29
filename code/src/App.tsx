@@ -1,14 +1,17 @@
+import { Suspense, lazy } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; 
 import { ActivityProvider } from './context/activity.context';
-import ListPage from './pages/ListPage';
-import Register from './pages/Register';
+
+const ListPage = lazy(() => import('./pages/ListPage'));
+const Register = lazy(() => import('./pages/Register/index'));
 
 const App = () => {
   return (
     <>
       <ActivityProvider>
         <GlobalStyle />
+        <Suspense fallback={<div>Carregando...</div>}></Suspense>
           <Router>
             <Routes>
               <Route path="/listPage" element={<ListPage />}/>
