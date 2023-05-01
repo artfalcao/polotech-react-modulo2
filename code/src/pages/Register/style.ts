@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { colors } from "../../GlobalStyle";
 
 export const Container = styled.div`
   border: 1px solid white;
   border-radius: 1em;
   width: 35vw;
   height: 70vh;
-  margin: 1em auto;
   padding: 1em;
+  background-color: ${colors.primary};
 
   display: flex;
   flex-direction: column;
@@ -47,4 +48,27 @@ export const SubmitButton = styled.button`
   background-color: #D5CCFF;
   color: #2B1887;
   cursor: pointer;
+`;
+
+export const RightContainer = styled.div`
+  width: 40vw;
+  height: 70vh;
+
+  
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const Wrapper = styled.div`
+  width: 95vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
+  /* border: 1px solid black; */
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../GlobalStyle";
 
 export const ToDoContainer = styled.div`
   height: 70vh;
@@ -8,7 +9,7 @@ export const ToDoContainer = styled.div`
   padding-left: 1em;
   border: none;
   border-radius: 16px;
-  background-color: #D5CCFF;
+  background-color: ${colors.primary};
   
   display: flex;
   flex-direction: column;
@@ -26,9 +27,9 @@ export const ToDoContainer = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #2B1887;    /* color of the scroll thumb */
+    background-color: ${colors.primary};    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #F4F2FF;  /* creates padding around scroll thumb */
+    border: 3px solid ${colors.lightSecondary};  /* creates padding around scroll thumb */
   }
 `
 

@@ -1,13 +1,14 @@
 import styled from "styled-components";
+import { colors } from "../../GlobalStyle";
 
 export const Input = styled.input`
-  width: 80%;
+  width: 90%;
   height: 20px;
   margin: 0 auto;
   padding: 1em;
   border: none;
   border-radius: 16px;
-  background-color: #D5CCFF;
+  background-color: ${colors.lightGrey};
   color: #000;
   font-size: 1.2em;
 
