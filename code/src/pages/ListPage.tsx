@@ -10,6 +10,7 @@ import Spacer from '../components/Spacer';
 import Input from '../components/Input';
 import Header from '../components/Header';
 import { Column } from '../components/Column/index';
+import SearchTerm from '../components/SearchTerm';
 
 //types
 import { IActivity } from '../components/Activity/Activity.types';
@@ -23,7 +24,7 @@ export type TStatus = {
 }
 
 const ListPage = () => {
-  const {  activitys, addActivity, updateActivityCompletion } = useActivity();
+  const {  activitys, addActivity, updateActivityCompletion, searchTerm, setSearchTerm, activitysFilter } = useActivity();
   const [newActivityLabel, setNewActivityLabel] = useState("");
 
   const handleActivityChange = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -76,12 +77,13 @@ const ListPage = () => {
       </Column>
 
       <Column>
+        <SearchTerm />
+        <Spacer height='.5'/>
         <ToDoContainer>
-          <Spacer height='1'/>
-          
+        
             {activitys.length === 0 
               ? (<Dataless />) 
-              : activitys.map((eachActivity) => (
+              : activitysFilter.map((eachActivity) => (
               <>
               <ActivityCard key={eachActivity.id} checked={eachActivity.checked} >
                 <Checkbox 

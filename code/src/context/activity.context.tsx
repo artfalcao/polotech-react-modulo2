@@ -11,6 +11,9 @@ interface IActivityContext {
   activitys: IActivity[];
   addActivity: (label: string) => void;
   updateActivityCompletion: (activityId: string, checked: boolean) => void;
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  activitysFilter: IActivity[];
 }
 
 const ActivityContext = createContext<IActivityContext>({} as IActivityContext);
@@ -21,7 +24,10 @@ interface IProps {
 
 const ActivityProvider = ({ children }: IProps) => {
   const [activitys, setActivitys] = useState<IActivity[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activitysFilter, setActivitysFilter] = useState<IActivity[]>([]);
 
+  // to catch activitys from LocalStoreage
   useEffect(() => {
     const fetchActivitys = () => {
       const activitysString = localStorage.getItem("activitys");
@@ -33,6 +39,13 @@ const ActivityProvider = ({ children }: IProps) => {
 
     fetchActivitys();
   }, []);
+
+  useEffect(() => {
+    const listActivity = activitys.filter((eachActivity) =>
+    eachActivity.label.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setActivitysFilter(listActivity);
+  }, [searchTerm, activitys]);
 
   const addActivity = (label : string) => {
     const id = nanoid();
@@ -61,7 +74,10 @@ const ActivityProvider = ({ children }: IProps) => {
       value={{
         activitys,
         addActivity,
-        updateActivityCompletion
+        updateActivityCompletion,
+        activitysFilter,
+        searchTerm,
+        setSearchTerm
       }} >
       {children}
     </ActivityContext.Provider>

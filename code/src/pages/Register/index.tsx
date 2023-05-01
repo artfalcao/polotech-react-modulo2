@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Title, Container, Form, Input, SubmitButton } from "./style";
+import { Title, Container, Form, Input, SubmitButton, RightContainer, Wrapper } from "./style";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RegisterImg from '../../assets/img/register-img.svg';
 
 type TRegisterData = {
   name: string,
@@ -74,30 +75,37 @@ const Register = () => {
   }
 
   return (
-    <Container>
-     <Title>Gerenciador de Tarefas</Title>
-     <Form>
-      <Input 
-        type="text" 
-        placeholder="Insira seu nome" 
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input 
-        type="email" 
-        placeholder="Insira seu email" 
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input 
-        type="password" 
-        placeholder="Insira sua senha" 
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <SubmitButton onClick={cadastrarUsuario}>
-        Cadastrar
-      </SubmitButton>
-      <ToastContainer />
-     </Form>
-    </Container>
+    <Wrapper>
+      <Container>
+      <Title>Gerenciador de Tarefas</Title>
+      <Form>
+        <Input 
+          type="text" 
+          placeholder="Insira seu nome" 
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input 
+          type="email" 
+          placeholder="Insira seu email" 
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input 
+          type="password" 
+          placeholder="Insira sua senha" 
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <SubmitButton onClick={cadastrarUsuario}>
+          Cadastrar
+        </SubmitButton>
+        <ToastContainer />
+      </Form>
+      </Container>
+
+      <RightContainer>
+        <img src={RegisterImg} alt="To-do list image" />
+      </RightContainer>
+    </Wrapper>
+    
   )
 }
 
