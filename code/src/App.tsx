@@ -14,8 +14,12 @@ const App = () => {
         <Suspense fallback={<div>Carregando...</div>}></Suspense>
           <Router>
             <Routes>
-              <Route path="/listPage" element={<ListPage />}/>
-              <Route path='/' element={<Register />}/>
+              <Route 
+                path="/listPage" 
+                element={<Suspense fallback={<div>Carregando...</div>}><ListPage /></Suspense>}/>
+              <Route 
+                path='/' 
+                element={<Suspense fallback={<div>Carregando...</div>}><Register /></Suspense>}/>
             </Routes>
           </Router>
       </ActivityProvider>
