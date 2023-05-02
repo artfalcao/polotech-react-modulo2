@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useActivity } from '../context/activity.context';
 
 //components
@@ -25,18 +25,39 @@ export type TStatus = {
 
 const ListPage = () => {
   const {  activitys, addActivity, updateActivityCompletion, searchTerm, setSearchTerm, activitysFilter } = useActivity();
-  const [newActivityLabel, setNewActivityLabel] = useState("");
+  const [newActivityLabel1, setNewActivityLabel1] = useState("");
+  const [newActivityLabel2, setNewActivityLabel2] = useState("");
 
-  const handleActivityChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-    setNewActivityLabel(e.target.value);
-  }
 
-  const handleActivityKeyPress = (e : React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && newActivityLabel !== "") {
-      addActivity(newActivityLabel);
-      setNewActivityLabel("");
-    }
-  }
+  const handleActivityChange1 = useCallback(
+    (e : React.ChangeEvent<HTMLInputElement>) => {
+      setNewActivityLabel1(e.target.value);
+    }, []
+  ) 
+
+  const handleActivityChange2 = useCallback(
+    (e : React.ChangeEvent<HTMLInputElement>) => {
+      setNewActivityLabel2(e.target.value);
+    }, []
+  ) 
+
+  const handleActivityKeyPress1 = useCallback(
+    (e : React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter" && newActivityLabel1 !== "") {
+        addActivity(newActivityLabel1);
+        setNewActivityLabel1("");
+      }
+    }, [newActivityLabel1]
+  ) 
+
+  const handleActivityKeyPress2 = useCallback(
+    (e : React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter" && newActivityLabel2 !== "") {
+        addActivity(newActivityLabel2);
+        setNewActivityLabel2("");
+      }
+    }, [newActivityLabel2]
+  ) 
 
   const handleActivityCompleteChange = (event: React.ChangeEvent<HTMLInputElement>, eachActivity : IActivity) => {
       updateActivityCompletion(eachActivity.id, event.target.checked);
@@ -102,9 +123,18 @@ const ListPage = () => {
         </ToDoContainer>
         <Input 
           placeholder="Digite sua nova atividade"
-          value={newActivityLabel}
-          onChange={handleActivityChange}
-          onKeyPress={handleActivityKeyPress}
+          value={newActivityLabel1}
+          onChange={handleActivityChange1}
+          onKeyPress={handleActivityKeyPress1}
+        />
+
+        <Spacer height='.5' />
+
+        <Input 
+          placeholder="Digite sua nova atividade"
+          value={newActivityLabel2}
+          onChange={handleActivityChange2}
+          onKeyPress={handleActivityKeyPress2}
         />
       </Column>
       
